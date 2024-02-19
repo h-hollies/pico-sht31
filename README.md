@@ -8,7 +8,7 @@ Here is my solution for anybody else struggling to program the SHT31 alongside t
 
 Please find attached my setup on the breadboard.
 
-![Pico W with sht31 sensor](img/20240218_220134.jpg)
+![Pico W with sht31 sensor](img/20240218_220243.jpg)
 
 ## Pins:
 - VCC (temp sensor): connect this to 3V on the Pico
