@@ -8,7 +8,7 @@ Here is my solution for anybody else struggling to program the SHT31 alongside t
 
 Please find attached my setup on the breadboard.
 
-![Pico W with sht31 sensor](img/20240218_220243.jpg)
+![Pico W with sht31 sensor](img/20240218_220134.jpg)
 
 ## Pins:
 - VCC (temp sensor): connect this to 3V on the Pico
@@ -25,4 +25,4 @@ The Blue LED is controlled by Pin 6 and will flash fast when the Pico is trying 
 Once the Pico W is running the data can be seen in a webbrowser by typing in the Pico's IP address. The Pico's IP address will be printed in the terminal when you execute the code.
 
 ## Please Note:
-Read through the code carefully before using it, there are parts that you WILL need to change in order for it to work for you. *i.e ssid and password credentials in config.py / possibly your sensor address could be different!* If you are using the Pico and don't have wifi access, the top half of this code will work. Just comment out everything after the Network Configuration and print the results to the terminal!
+Read through the code carefully before using it, there are parts that you WILL need to change in order for it to work for you. *i.e ssid and password credentials / possibly your sensor address could be different!* If you are using the Pico and don't have wifi access, the top half of this code will work. Just comment out everything after the Network Configuration and print the results to the terminal!

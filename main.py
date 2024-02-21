@@ -109,8 +109,8 @@ class SHT31(object):
 
 # Configure Newtwork (Pico W Only)
 
-ssid = config.ssid
-password = config.password
+ssid = 'VM0384077'
+password = 'cgVzstyg6ckn'
 
 
 def connect():
@@ -178,31 +178,45 @@ def serve(connection):
     # Start web server    
     while True:
         try:
-            reading = {'Temp': int(sensor.get_temp_humi()[0]), 'Humidity': int(sensor.get_temp_humi()[1])}
-            client = connection.accept()[0]
-            request = client.recv(1024)
-            html = webpage(reading)
-            client.send(html)
-            # Slow flash led to show the program is working
+            # Validate Data received from sensor
+            temp = sensor.get_temp_humi()[0]
+            humi = sensor.get_temp_humi()[1]
+            if isinstance(temp, float) and isinstance(humi, float):
+                temp = int(temp)
+                humi = int(humi)
+                if temp > -5 and  temp < 70 and humi >= 0 and humi <= 99:
+                    
+                    # Data passed validation, Send data!
+                    sensor_data = {'Temp': temp, 'Humidity': humi}
+                    print(sensor_data)
+                    client = connection.accept()[0]
+                    request = client.recv(1024)
+                    html = webpage(sensor_data)
+                    client.send(html)
+                    
+                    # Slow flash led to show the program is working
+                    blue.value(0)
+                    sleep(1)
+                    blue.value(1)
+                    sleep(2)
+                    blue.value(0)
+                    sleep(1)
+                    blue.value(1)
+                    sleep(2)
+                    client.close()
+                else:
+                    print("Invalid data from sensor")
+                    continue
+            else:
+                print("Invalid data from sensor")
+                continue
+        except Exception as e:
+            print(f"Error sending data {e}")
             blue.value(0)
-            sleep(1)
-            blue.value(1)
-            sleep(4)
-            blue.value(0)
-            sleep(1)
-            blue.value(1)
-            sleep(4)
-            client.close()
-        except:
-            blue.value(0)
-            sleep(10)
-            break
+            sleep(2)
+            serve(connection)
 
 #-----------------------------------------------------------------------------------------
-
-
-
-
 
 
 blue = Pin(6, Pin.OUT)
@@ -217,4 +231,3 @@ while True:
         blue.value(1)
         connection = open_socket(ip)
         serve(connection)
-
