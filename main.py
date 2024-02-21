@@ -8,8 +8,6 @@ from time import sleep, sleep_ms
 import network
 import socket
 
-import config
-
 # Run this code to find out what the address is of the temperature sensor
 # Return a decimal number, needs converting to hexadecimal
 i2c = I2C(0, scl=Pin(5), sda=Pin(4), freq=400000)
@@ -109,8 +107,8 @@ class SHT31(object):
 
 # Configure Newtwork (Pico W Only)
 
-ssid = 'VM0384077'
-password = 'cgVzstyg6ckn'
+ssid = '************'
+password = '************'
 
 
 def connect():
