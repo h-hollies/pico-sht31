@@ -182,7 +182,7 @@ def serve(connection):
             if isinstance(temp, float) and isinstance(humi, float):
                 temp = int(temp)
                 humi = int(humi)
-                if temp > -5 and  temp < 70 and humi >= 0 and humi <= 99:
+                if temp >= -5 and  temp <= 45 and humi >= 0 and humi <= 100:
                     
                     # Data passed validation, Send data!
                     sensor_data = {'Temp': temp, 'Humidity': humi}
